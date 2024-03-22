@@ -13,8 +13,9 @@ citatel = (K/(T1*T2));
 menovatel = [1,(T1+T2)/(T1*T2), 1/(T1*T2)];
 
 %% Spracovanie - Gz
-G = tf(citatel, menovatel, 'InputDelay', Delay);
-Gz_celk = c2d(G, T, 'zoh')
+Gs = tf(citatel, menovatel, 'InputDelay', Delay);
+Gp = pade(Gs,1);
+Gz_celk = c2d(Gp, T, 'zoh')
 
 %% Dead beat
 citatel1 = cell2mat(Gz_celk.Numerator); %konvert cell na maticu
@@ -23,9 +24,11 @@ menovatel1 = cell2mat(Gz_celk.Denominator);
 q00 = 1/sum(citatel1(2:end)); %sum citatela
 q01 = menovatel1(2)*q00;
 q02 = menovatel1(3)*q00;
+q03 = menovatel1(4)*q00;
 
 p01 = citatel1(2)*q00;
 p02 = citatel1(3)*q00;
+p03 = citatel1(4)*q00;
 
 %% Dead beat AZ
 bSum = sum(citatel1(2:end));
