@@ -14,33 +14,33 @@ menovatel = [1,(T1+T2)/(T1*T2), 1/(T1*T2)];
 
 %% Spracovanie - Gz
 G = tf(citatel, menovatel, 'InputDelay', Delay);
-Gp = pade(G,1);
-Gz_celk = c2d(Gp, T, 'zoh')
+Gz_celk = c2d(G, T);
 
 %% Dead beat
-citatel1 = cell2mat(Gz_celk.Numerator); %konvert cell na maticu
-menovatel1 = cell2mat(Gz_celk.Denominator);
+citatel1 = cell2mat(Gz_celk.num); %konvert cell na maticu
+menovatel1 = cell2mat(Gz_celk.den);
 
-q00 = 1/sum(citatel1(2:end)); %sum citatela
+q00 = 1/(sum(citatel1,"all")); %sum citatela
 q01 = menovatel1(2)*q00;
 q02 = menovatel1(3)*q00;
-q03 = menovatel1(4)*q00;
+% q03 = menovatel1(3)*q00;
 
-p01 = citatel1(2)*q00;
-p02 = citatel1(3)*q00;
-p03 = citatel1(4)*q00;
+p01 = citatel1(1)*q00;
+p02 = citatel1(2)*q00;
+p03 = citatel1(3)*q00;
 
+grz = filt([q00, q01, q02], [1, -p01, -p02, -p03], T);
 %% Dead beat AZ
-bSum = sum(citatel1(2:end));
+bSum = sum(citatel1,"all");
 
 q10 = 0.089115984; %0.0968652 -> 92%
 q11 = q10*(menovatel1(2)-1)+1/bSum;
 q12 = q10*(menovatel1(3)-menovatel1(2))+(menovatel1(2)/bSum);
-q13 = q10*(menovatel1(4)-menovatel1(3))+(menovatel1(3)/bSum);
+% q13 = q10*(menovatel1(3)-menovatel1(2))+(menovatel1(2)/bSum);
 
-p11 = q10*citatel1(2);
-p12 = q10*(citatel1(3)-citatel1(2))+(citatel1(2)/bSum);
-p13 = q10*(citatel1(4)-citatel1(3))+(citatel1(3)/bSum);
+p11 = q10*citatel1(1);
+p12 = q10*(citatel1(2)-citatel1(1))+(citatel1(1)/bSum);
+p13 = q10*(citatel1(3)-citatel1(2))+(citatel1(2)/bSum);
 
 %% Simulacia a vykreslenie
 figure(1)
