@@ -17,10 +17,10 @@ G = tf(citatel, menovatel, 'InputDelay', Delay);
 Gz_celk = c2d(G, T);
 
 %% Dead beat
-citatel1 = cell2mat(Gz_celk.num); %konvert cell na maticu
+citatel1 = cell2mat(Gz_celk.num);
 menovatel1 = cell2mat(Gz_celk.den);
 
-q00 = 1/(sum(citatel1,"all")); %sum citatela
+q00 = 1/(sum(citatel1,"all"));
 q01 = menovatel1(2)*q00;
 q02 = menovatel1(3)*q00;
 
