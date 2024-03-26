@@ -23,7 +23,6 @@ menovatel1 = cell2mat(Gz_celk.den);
 q00 = 1/(sum(citatel1,"all")); %sum citatela
 q01 = menovatel1(2)*q00;
 q02 = menovatel1(3)*q00;
-% q03 = menovatel1(3)*q00;
 
 p01 = citatel1(1)*q00;
 p02 = citatel1(2)*q00;
@@ -36,7 +35,6 @@ bSum = sum(citatel1,"all");
 q10 = 0.089115984; %0.0968652 -> 92%
 q11 = q10*(menovatel1(2)-1)+1/bSum;
 q12 = q10*(menovatel1(3)-menovatel1(2))+(menovatel1(2)/bSum);
-% q13 = q10*(menovatel1(3)-menovatel1(2))+(menovatel1(2)/bSum);
 
 p11 = q10*citatel1(1);
 p12 = q10*(citatel1(2)-citatel1(1))+(citatel1(1)/bSum);
