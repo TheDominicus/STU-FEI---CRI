@@ -28,7 +28,7 @@ p01 = citatel1(1)*q00;
 p02 = citatel1(2)*q00;
 p03 = citatel1(3)*q00;
 
-grz = filt([q00, q01, q02], [1, -p01, -p02, -p03], T);
+grz = filt([q00, q01, q02], [1, -p01, -p02, -p03], T)
 %% Dead beat AZ
 bSum = sum(citatel1,"all");
 
