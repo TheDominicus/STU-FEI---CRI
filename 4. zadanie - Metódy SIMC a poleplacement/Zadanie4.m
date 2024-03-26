@@ -33,10 +33,12 @@ Grz_den = Grz.den{1};
 
 Grz_uro = (Grz*G_z)/(1+(Grz*G_z));
 figure;
+out = sim("BlokSchema.slx");
+plot(out.SYMC)
 step(Grz_uro);
 
 %% Poleplacement
 
 
 %% Simulácia a výpis
-out = sim("BlokSchema.slx");
+%out = sim("BlokSchema.slx");
