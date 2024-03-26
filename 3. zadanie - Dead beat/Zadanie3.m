@@ -32,7 +32,7 @@ grz = filt([q00, q01, q02], [1, -p01, -p02, -p03], T)
 %% Dead beat AZ
 bSum = sum(citatel1,"all");
 
-q10 = 0.089115984; %0.0968652 -> 92%
+q10 = q00*0.95;
 q11 = q10*(menovatel1(2)-1)+1/bSum;
 q12 = q10*(menovatel1(3)-menovatel1(2))+(menovatel1(2)/bSum);
 
